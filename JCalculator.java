@@ -4,8 +4,11 @@ import javax.swing.*;
 
 class JCalculator implements ActionListener
 {
-    JLabel screen = new JLabel ("Screen");
-    String current_screen = "";
+    JLabel screen = new JLabel ("0");
+    String operand = "";
+    String default_screen = "0";
+    boolean add = false, subtract = false, multiply = false, divide = false;
+    int total;
     final int DIGITCOUNTER = 10;
     int digits = 0;
     // Digits
@@ -96,6 +99,7 @@ class JCalculator implements ActionListener
         digits_button_panel.add(button_divide);
 
         // Add Action Listeners
+        button_0.addActionListener(this);
         button_1.addActionListener(this);
         button_2.addActionListener(this);
         button_3.addActionListener(this);
@@ -131,68 +135,149 @@ class JCalculator implements ActionListener
 
         if (e.getSource() == button_0 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "0";
-            screen.setText(current_screen);
+            operand = operand + "0";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_1 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "1";
-            screen.setText(current_screen);
+            operand = operand + "1";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_2 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "2";
-            screen.setText(current_screen);
+            operand = operand + "2";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_3 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "3";
-            screen.setText(current_screen);
+            operand = operand + "3";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_4 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "4";
-            screen.setText(current_screen);
+            operand = operand + "4";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_5 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "5";
-            screen.setText(current_screen);
+            operand = operand + "5";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_6 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "6";
-            screen.setText(current_screen);
+            operand = operand + "6";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_7 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "7";
-            screen.setText(current_screen);
+            operand = operand + "7";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_8 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "8";
-            screen.setText(current_screen);
+            operand = operand + "8";
+            screen.setText(operand);
             digits++;
         }
         if (e.getSource() == button_9 &&  ( digits < DIGITCOUNTER ) )
         {
-            current_screen = current_screen + "9";
-            screen.setText(current_screen);
+            operand = operand + "9";
+            screen.setText(operand);
             digits++;
         }
-        
+
+        if (e.getSource() == button_clear )
+        {
+            add = false;
+            subtract = false;
+            multiply = false;
+            divide = false;
+            total = 0;
+            operand = "";
+            screen.setText(default_screen);
+        }
+        if (e.getSource() == button_add )
+        {
+            add = true;
+            subtract = false;
+            multiply = false;
+            divide = false;
+            total = Integer.parseInt(operand);
+            operand = "";
+            screen.setText("+");
+        }
+        if (e.getSource() == button_subtract )
+        {
+            add = false;
+            subtract = true;
+            multiply = false;
+            divide = false;
+            total = Integer.parseInt(operand);
+            operand = "";
+            screen.setText("-");
+        }
+        if (e.getSource() == button_multiply )
+        {
+            add = false;
+            subtract = false;
+            multiply = true;
+            divide = false;
+            total = Integer.parseInt(operand); 
+            operand = "";
+            screen.setText("*");
+        }
+        if (e.getSource() == button_divide )
+        {
+            add = false;
+            subtract = false;
+            multiply = false;
+            divide = true;
+            total = Integer.parseInt(operand);
+            operand = "";
+            screen.setText("/");
+        }
+        if (e.getSource() == button_equals )
+        {
+            if ( add == true )
+            {
+                total = total + Integer.parseInt( operand );
+                screen.setText( Integer.toString(total) );
+                add = false;
+                operand = "";
+            }
+            if ( subtract == true )
+            {
+                total = total - Integer.parseInt( operand );
+                screen.setText( Integer.toString(total) );
+                subtract = false;
+                operand = "";
+            }
+            if ( multiply == true )
+            {
+                total = total * Integer.parseInt( operand );
+                screen.setText( Integer.toString(total) );
+                multiply = false;
+                operand = "";
+            }
+            if ( divide == true )
+            {
+                total = total / Integer.parseInt( operand );
+                screen.setText( Integer.toString(total) );
+                divide = false;
+                operand = "";
+            }
+
+        }
+
     }
-    
-    
     
     public static void main ( String[] args )
     {
