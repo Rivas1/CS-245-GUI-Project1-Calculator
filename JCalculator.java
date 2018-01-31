@@ -1,3 +1,14 @@
+//
+//       Name:      Rivas, Christopher
+//       Project:   1
+//       Due: date: 01/31/18
+//       Course:    CS-245-01-w18
+//
+//       Description:
+//                  A simple calculator implemented using Java's Swing Library.
+//                  Contains addition, subtraction, multiplication, and division
+//                  features. Note, this application only uses integers.
+//
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -27,7 +38,7 @@ class JCalculator implements ActionListener
         JFrame frm = new JFrame("Calculator");
         frm.setLayout( new BoxLayout(frm.getContentPane(), BoxLayout.Y_AXIS ) );
 
-        // Center JFrame
+        // Center JFrame on screen
         frm.pack();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
@@ -36,7 +47,6 @@ class JCalculator implements ActionListener
         frm.setLocationRelativeTo(null);
 
         // Create Display Panel
-        
         JPanel display_panel = new JPanel();
         display_panel.setBorder(BorderFactory.createLineBorder(Color.black));
         display_panel.setSize(300,300);
@@ -117,7 +127,7 @@ class JCalculator implements ActionListener
         button_clear.addActionListener(this);
 
         // Set default button (=)
-       digits_button_panel.getRootPane().setDefaultButton(button_equals);
+        digits_button_panel.getRootPane().setDefaultButton(button_equals);
 
         // Exit on close
         frm.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -132,7 +142,10 @@ class JCalculator implements ActionListener
     
     public void actionPerformed (ActionEvent e)
     {
-
+        if ( digits >= DIGITCOUNTER )
+        {
+            screen.setText("Overflow");
+        }
         if (e.getSource() == button_0 &&  ( digits < DIGITCOUNTER ) )
         {
             operand = operand + "0";
@@ -202,6 +215,7 @@ class JCalculator implements ActionListener
             divide = false;
             total = 0;
             operand = "";
+            digits = 0;
             screen.setText(default_screen);
         }
         if (e.getSource() == button_add )
@@ -274,9 +288,7 @@ class JCalculator implements ActionListener
                 divide = false;
                 operand = "";
             }
-
         }
-
     }
     
     public static void main ( String[] args )
